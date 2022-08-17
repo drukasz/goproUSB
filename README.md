@@ -1,6 +1,5 @@
 # goproUSB
-
-## A simple Python package for controlling, recording images and videos, and downloading media from GoPro cameras connected via USB.
+A simple Python package for controlling, recording images and videos, and downloading media from GoPro cameras connected via USB.
 
 It allows to connect to a single or multiple cameras and perform simultaneous recordings of images or videos.
 
