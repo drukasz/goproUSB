@@ -10,7 +10,7 @@ I have only tested it with HERO 10 cameras. Not sure how will it work with other
 
 Example usage - take picture and download it to a current working directory:
 
-serial_number = 'C3xxxxxxxxxxxx'
+serial_number = 'C3xxxxxxxxxxxx'\\
 output_file_name = 'image'
 from goproUSB import GPcam
 cam1 = GPcam(serial_number)
