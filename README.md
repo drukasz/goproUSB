@@ -1,6 +1,6 @@
 # goproUSB
 
-A simple Python package for controlling, recording images and videos, and downloading media from GoPro cameras connected via USB.
+##A simple Python package for controlling, recording images and videos, and downloading media from GoPro cameras connected via USB.
 
 It allows to connect to a single or multiple cameras and perform simultaneous recordings of images or videos.
 
@@ -10,18 +10,18 @@ I have only tested it with HERO 10 cameras. Not sure how will it work with other
 
 Example usage - take picture and download it to a current working directory:
 
-serial_number = 'C3xxxxxxxxxxxx'\\
-output_file_name = 'image'
-from goproUSB import GPcam
-cam1 = GPcam(serial_number)
-cam1.USBenable()
-cam1.modePhoto()
-cam1.shutterStart()
-#wait for the camera to finish processing:
-while cam1.camBusy():
-    continue
-while cam1.encodingActive():
-    continue
-cam1.mediaDownloadLastJpg(output_file_name)
+serial_number = 'C3xxxxxxxxxxxx'<br />
+output_file_name = 'image'<br />
+from goproUSB import GPcam<br />
+cam1 = GPcam(serial_number)<br />
+cam1.USBenable()<br />
+cam1.modePhoto()<br />
+cam1.shutterStart()<br />
+#wait for the camera to finish processing:<br />
+while cam1.camBusy():<br />
+    continue<br />
+while cam1.encodingActive():<br />
+    continue<br />
+cam1.mediaDownloadLastJpg(output_file_name)<br />
 
 For examples of other operating options - recording videos, using webcam mode, and acquiring data from multiple cameras simultaneously - please refer to the "examples" folder.
