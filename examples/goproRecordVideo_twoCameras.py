@@ -61,5 +61,8 @@ fileidx = len(glob.glob(f'{fname}1_*.mp4')) + 1
 
 
 
-cam1.mediaDownloadLastMP4(f'{fname}1_{fileidx:03}')
-cam2.mediaDownloadLastMP4(f'{fname}2_{fileidx:03}')
+cam1.mediaDownloadLast(f'{fname}1_{fileidx:03}')
+cam2.mediaDownloadLast(f'{fname}2_{fileidx:03}')
+
+cam1.USBdisable()
+cam2.USBdisable()
