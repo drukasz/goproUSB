@@ -7,8 +7,8 @@
 #************************ INPUT PARAMETERS **************************************
 #Camera serial number - you can find it either under settings in the camera itself,
 #or by selecting the camera and clicking "Properties" in the file explorer
-SNcam1 = 'C3461325928520'
-SNcam2 = 'C3461325919513'
+SNcam1 = 'C3xxxxxxxxxxxx'
+SNcam2 = 'C3yyyyyyyyyyyy'
 
 #Core file name using which all the subsequent downloaded images will be saved
 #camera number and image number will be added automatically, do not include them here
