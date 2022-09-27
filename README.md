@@ -21,6 +21,7 @@ while cam1.camBusy():<br />
    &emsp; continue<br />
 while cam1.encodingActive():<br />
    &emsp; continue<br />
-cam1.mediaDownloadLastJpg(output_file_name)<br />
+cam1.mediaDownloadLast(output_file_name)<br />
+cam1.USBdisable(output_file_name)<br />
 
 For examples of other operating options - recording videos, using webcam mode, and acquiring data from multiple cameras simultaneously - please refer to the "examples" folder.
