@@ -16,6 +16,7 @@
 #along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 import requests
+import datetime
 
 
 class GPcam:
@@ -30,6 +31,14 @@ class GPcam:
         return response
     def getDateTime(self):
         url = self.base_url + '/gopro/camera/get_date_time'
+        response = requests.get(url)
+        return response
+    def setDateTime(self,y,mo,d,h,mi,s):
+        url = self.base_url + f'/gopro/camera/set_date_time?date={y}_{mo}_{d}&time={h}_{mi}_{s}'
+        response = requests.get(url)
+        return response
+    def setDateTimeNow(self):
+        url = self.base_url + datetime.datetime.now().strftime('/gopro/camera/set_date_time?date=%Y_%m_%d&time=%H_%M_%S')
         response = requests.get(url)
         return response
     #*******************************************
@@ -385,45 +394,32 @@ class GPcam:
     #*******************************************
     #Media 
     #*******************************************
-    #Download the most recent image file from the camera
-    #outFileName - name of file to which save the last taken picture
-    def mediaDownloadLastJpg(self,outFileName):
-        outFileName = outFileName.split('.')[0] + '.jpg' #make sure that the name ends with .jpg
+    #Download the last captured media file from the camera
+    #outFileName - name of file to which save the last taken picture (extension added/modified automatically)
+    def mediaDownloadLast(self,outFileName):
         ml = self.getMediaList()
-        fnames = []
-        for media_file in [x["n"] for x in ml.json()['media'][0]['fs']]:
-            if media_file.lower().endswith(".jpg"):
-                fnames.append(media_file)
-        if len(fnames) == 0:
-            return False
-        else:
-            while self.encodingActive():
-                continue
-            url = self.base_url + f"/videos/DCIM/100GOPRO/{fnames[-1]}"
-            with requests.get(url, stream=True) as request:
-                request.raise_for_status()
-                with open(outFileName, "wb") as f:
-                    for chunk in request.iter_content(chunk_size=8192):
-                        f.write(chunk)
-            return True
-    #Download the most recent video file from the camera
-    #outFileName - name of file to which save the last taken picture
-    def mediaDownloadLastMP4(self,outFileName):
-        outFileName = outFileName.split('.')[0] + '.mp4' #make sure that the name ends with .jpg
-        ml = self.getMediaList()
-        fnames = []
-        for media_file in [x["n"] for x in ml.json()['media'][0]['fs']]:
-            if media_file.lower().endswith(".mp4"):
-                fnames.append(media_file)
-        if len(fnames) == 0:
-            return False
-        else:
-            while self.encodingActive():
-                continue
-            url = self.base_url + f"/videos/DCIM/100GOPRO/{fnames[-1]}"
-            with requests.get(url, stream=True) as request:
-                request.raise_for_status()
-                with open(outFileName, "wb") as f:
-                    for chunk in request.iter_content(chunk_size=8192):
-                        f.write(chunk)
-            return True
+        while self.encodingActive():
+            continue
+        url = self.base_url + f"/videos/DCIM/"+ml.json()['media'][-1]['d']+"/"+ml.json()['media'][-1]['fs'][-1]['n']
+        outFileName = outFileName.split('.')[0] + '.' + ml.json()['media'][-1]['fs'][-1]['n'].split('.')[1]
+        with requests.get(url, stream=True) as request:
+            request.raise_for_status()
+            with open(outFileName, "wb") as f:
+                for chunk in request.iter_content(chunk_size=8192):
+                    f.write(chunk)
+        return True
+    #
+    #Download specified media file, from the specified directory
+    #outFileName - name of file to which save the last taken picture (extension added/modified automatically)
+    def mediaDownloadFile(self,dirname,fname,outFileName):
+        url = self.base_url + '/videos/DCIM/' + dirname + "/" + fname
+        outFileName = outFileName.split('.')[0] + '.' + fname.split('.')[1]
+        with requests.get(url, stream=True) as request:
+            request.raise_for_status()
+            with open(outFileName, "wb") as f:
+                for chunk in request.iter_content(chunk_size=8192):
+                    f.write(chunk)
+        return True
+        
+
+
