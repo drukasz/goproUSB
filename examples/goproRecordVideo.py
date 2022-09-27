@@ -35,4 +35,6 @@ while cam1.encodingActive():
 
 
 
-cam1.mediaDownloadLastMP4(fname)
+cam1.mediaDownloadLast(fname)
+
+cam1.USBdisable()
