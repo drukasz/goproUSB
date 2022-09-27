@@ -7,8 +7,8 @@
 #************************ INPUT PARAMETERS **************************************
 #Camera serial number - you can find it either under settings in the camera itself,
 #or by selecting the camera and clicking "Properties" in the file explorer
-SNcam1 = 'C3xxxxxxxxxxxx'
-SNcam2 = 'C3yyyyyyyyyyyy'
+SNcam1 = 'C3461325928520'
+SNcam2 = 'C3461325919513'
 
 #Core file name using which all the subsequent downloaded images will be saved
 #camera number and image number will be added automatically, do not include them here
@@ -55,5 +55,8 @@ fileidx = len(glob.glob(f'{fname}1_*.jpg')) + 1
 
 
 
-cam1.mediaDownloadLastJpg(f'{fname}1_{fileidx:03}')
-cam2.mediaDownloadLastJpg(f'{fname}2_{fileidx:03}')
+cam1.mediaDownloadLast(f'{fname}1_{fileidx:03}')
+cam2.mediaDownloadLast(f'{fname}2_{fileidx:03}')
+
+cam1.USBdisable()
+cam2.USBdisable()
